@@ -10,7 +10,23 @@
 //
 //
 // -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
+Cypress.Commands.add('resetDataBase', () => {cy.request("POST","localhost:5000/clearbank") })
+Cypress.Commands.add('createRecomendation', () => {
+  cy.intercept('POST',"**/recommendations").as("PostRecommendation")
+  cy.request("POST","localhost:5000/recommendations",{name: 'musica Legal',youtubeLink:`https://youtu.be/08evFyfBEu8`
+  })
+  cy.wait("@PostRecommendation")
+
+})
+Cypress.Commands.add('upvote', (id) => {
+  cy.request("POST",`localhost:5000/recommendations/${id}/upvote`) 
+})
+
+Cypress.Commands.add('populeBank',  () => {
+   cy.request("POST","localhost:5000/popule") 
+})
+
+
 //
 //
 // -- This is a child command --
