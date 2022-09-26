@@ -1,2 +1,6 @@
 /nodemodules
 package-lock.json
+/src
+/public
+/build
+cypress.config.js
